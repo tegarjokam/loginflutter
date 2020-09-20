@@ -62,12 +62,12 @@ class LoginPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(29),
                   ),
                   child: TextField(
-                    obscureText: false,
+                    obscureText: true,
                     onChanged: (value) {},
                     controller: TextEditingController(),
                     decoration: InputDecoration(
                         icon: Icon(Icons.lock),
-                        suffixIcon: Icon(Icons.visibility),
+                        suffixIcon: Icon(Icons.visibility_off),
                         hintText: 'password',
                         border: InputBorder.none),
                   ),
@@ -88,11 +88,150 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {},
                     ),
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('don\'t have account ?'),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      // margin: EdgeInsets.symmetric(vertical: 5),
+                      width: 85,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: FlatButton(
+                          // padding: EdgeInsets.symmetric(
+                          //     vertical: 25, horizontal: 20),
+                          child: Text('Sign Up',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                          color: Colors.green,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterPage()));
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 )
               ],
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class RegisterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Register'),
+        backgroundColor: Colors.green,
+      ),
+      body: ListView(
+        children: <Widget>[
+          // BackButtonWidget(),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.person), onPressed: null),
+                Expanded(
+                    child: Container(
+                        margin: EdgeInsets.only(right: 20, left: 10),
+                        child: TextField(
+                          decoration: InputDecoration(hintText: 'Username'),
+                        )))
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.lock), onPressed: null),
+                Expanded(
+                    child: Container(
+                        margin: EdgeInsets.only(right: 20, left: 10),
+                        child: TextField(
+                          decoration: InputDecoration(hintText: 'Password'),
+                        )))
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.mail), onPressed: null),
+                Expanded(
+                    child: Container(
+                        margin: EdgeInsets.only(right: 20, left: 10),
+                        child: TextField(
+                          decoration: InputDecoration(hintText: 'Email'),
+                        )))
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                Radio(value: null, groupValue: null, onChanged: null),
+                RichText(
+                    text: TextSpan(
+                        text: 'I have accepted the',
+                        style: TextStyle(color: Colors.black),
+                        children: [
+                      TextSpan(
+                          text: ' Terms & Condition',
+                          style: TextStyle(
+                              color: Colors.teal, fontWeight: FontWeight.bold))
+                    ]))
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Container(
+                height: 60,
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'Home');
+                  },
+                  color: Color(0xFF00a79B),
+                  child: Text(
+                    'SIGN UP',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
