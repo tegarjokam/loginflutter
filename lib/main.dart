@@ -15,6 +15,12 @@ class MyApp extends StatelessWidget {
 }
 
 class LoginPage extends StatelessWidget {
+  TextEditingController usernameCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
+
+  String username = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +52,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   child: TextField(
                     onChanged: (value) {},
-                    controller: TextEditingController(),
+                    controller: usernameCtrl,
                     decoration: InputDecoration(
                         icon: Icon(Icons.person),
                         hintText: 'username',
@@ -64,7 +70,7 @@ class LoginPage extends StatelessWidget {
                   child: TextField(
                     obscureText: true,
                     onChanged: (value) {},
-                    controller: TextEditingController(),
+                    controller: passwordCtrl,
                     decoration: InputDecoration(
                         icon: Icon(Icons.lock),
                         suffixIcon: Icon(Icons.visibility_off),
@@ -85,7 +91,21 @@ class LoginPage extends StatelessWidget {
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
                       color: Color(0xffff5f40),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (usernameCtrl.text == "admin" &&
+                            passwordCtrl.text == "admin") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Home(
+                                msg: "Login successful!",
+                                username: usernameCtrl.text,
+                                password: passwordCtrl.text,
+                              ),
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -233,6 +253,58 @@ class RegisterPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class Home extends StatelessWidget {
+  String msg;
+  String username;
+  String password;
+
+  Home({this.msg, this.username, this.password});
+
+  @override
+  Widget build(BuildContext context) {
+    print(msg);
+    print(username);
+    print(password);
+    return Scaffold(
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: Text(msg),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Text(username),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Text(password),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: FlatButton(
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+                  child: Text('Logout',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
+                  color: Color(0xffff5f40),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            ),
+          ]),
     );
   }
 }
